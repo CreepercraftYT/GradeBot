@@ -4,14 +4,15 @@ import sqlite3
 import math
 import time
 import webserver
-from git import Repo
+from github import Github
 database = sqlite3.connect("Grades3.sqlite")
 cursor = database.cursor()
 client: client = nextcord.Client(intents=nextcord.Intents.all(), activity=nextcord.Game(name='tetris'))
-repo = Repo("CreepercraftYT/GradeBot")
-index = repo.index
-index.add([Grades3.sqlite])
-author = Actor("CreepercraftYT", "aaronx717@gmail.com")
+g=Auth.Login("CreepercraftYT", "CcYTT99*")
+repo=g.get_repo("CreepercraftYT/GradeBot")
+contents = repo.get_contents("Grades3.sqlite", ref="update")
+repo.update_file(contents.path, "update database", "update database", contents.sha, branch="main")
+
 
 cursor.execute("""CREATE TABLE IF NOT EXISTS main(user_id INTEGER, guild_id INTEGER, exp INTEGER, grade INTEGER, last_grade INTEGER, level INTEGER, difficulty INTEGER, channel_id INTEGER)""")
 #cursor.execute("""INSERT INTO main(difficulty) VALUES(1)""")
@@ -21,7 +22,6 @@ cursor.execute("""CREATE TABLE IF NOT EXISTS main(user_id INTEGER, guild_id INTE
 
 class Grading(commands.Cog):
     bot = commands.Bot()
-    index.commit("database commit", author=author)
     #application_checks = nextcord.applicaton_checks
     def __init__(self, bot):
         self.bot = bot
