@@ -13,8 +13,8 @@ client: client = nextcord.Client(intents=nextcord.Intents.all(), activity=nextco
 # print(auth)
 g=Github("CreepercraftYT", "CcYTT99*")
 repo=g.get_repo("CreepercraftYT/GradeBot")
-contents = repo.get_contents("Grades3.sqlite", ref="update")
-repo.update_file(contents.path, "update database", "update database", contents.sha, branch="main")
+contents = repo.get_contents("Grades3.sqlite", ref="Add files via upload")
+repo.update_file(contents.path, "Add files via upload", "Add files via upload", contents.sha, branch="main")
 
 
 cursor.execute("""CREATE TABLE IF NOT EXISTS main(user_id INTEGER, guild_id INTEGER, exp INTEGER, grade INTEGER, last_grade INTEGER, level INTEGER, difficulty INTEGER, channel_id INTEGER)""")
