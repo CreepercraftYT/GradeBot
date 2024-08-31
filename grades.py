@@ -8,7 +8,7 @@ from git import Repo
 database = sqlite3.connect("Grades3.sqlite")
 cursor = database.cursor()
 client: client = nextcord.Client(intents=nextcord.Intents.all(), activity=nextcord.Game(name='tetris'))
-repo = Repo(CreepercraftYT/GradeBot)
+repo = Repo("CreepercraftYT/GradeBot")
 index = repo.index
 index.add([Grades3.sqlite])
 author = Actor("CreepercraftYT", "aaronx717@gmail.com")
