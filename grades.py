@@ -88,13 +88,13 @@ class Grading(commands.Cog):
             accurate_exp_thresholds = [400, 800, 1400, 2000, 3500, 5500, 8000, 12000, 16000, 22000, 30000, 40000, 52000, 66000, 82000,
                                          100000, 120000, 126000]
             if result == 0:
-                exp_threshold = easy_exp_thresholds[grade]
+                exp_threshold = easy_exp_thresholds[grade-1]
             elif result == 1:
-                exp_threshold = normal_exp_thresholds[grade]
+                exp_threshold = normal_exp_thresholds[grade-1]
             elif result == 2:
-                exp_threshold = hard_exp_thresholds[grade]
+                exp_threshold = hard_exp_thresholds[grade-1]
             else:
-                exp_threshold = accurate_exp_thresholds[grade]
+                exp_threshold = accurate_exp_thresholds[grade-1]
             print('experience: ' + str(exp),'threshold: ' + str(exp_threshold),'grade: ' + str(grade))
             if grade <= 8:
                 exp_gain = 1
