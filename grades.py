@@ -5,6 +5,7 @@ import math
 import time
 import webserver
 from github import Github
+from github import Auth
 database = sqlite3.connect("Grades3.sqlite")
 cursor = database.cursor()
 client: client = nextcord.Client(intents=nextcord.Intents.all(), activity=nextcord.Game(name='tetris'))
