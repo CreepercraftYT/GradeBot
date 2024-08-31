@@ -34,7 +34,7 @@ class Grading(commands.Cog):
                 show_grade = 0
                 difficulty = 0
                 cursor.execute(
-                    f"INSERT INTO main(user_id, guild_id, exp, grade, last_grade, level, difficulty, disable_ranking_message, show_new_grade) VALUES({message.author.id}, {message.guild.id}, 0, 0, 32, 0, 1, {no_message}, {show_grade})")
+                    f"INSERT INTO main(user_id, guild_id, exp, grade, last_grade, level, difficulty, disable_ranking_message, show_new_grade, cool, regret) VALUES({message.author.id}, {message.guild.id}, 0, 0, 32, 0, 1, {no_message}, {show_grade}, 0, 0)")
                 database.commit()
             else:
                 cursor.execute(
@@ -87,14 +87,17 @@ class Grading(commands.Cog):
             hard_exp_thresholds = [200,	400,	700,	1000,	1750,	2750,	4000,	6000,	8000,	11000,	15000,	20000,	26000,	33000,	41000,	50000,	60000,	80000,	110000,	150000,	200000,	260000,	330000,	410000,	500000,	600000,	750000,	1000000,	1150000,	1450000,	1700000,	2000000]
             accurate_exp_thresholds = [400, 800, 1400, 2000, 3500, 5500, 8000, 12000, 16000, 22000, 30000, 40000, 52000, 66000, 82000,
                                          100000, 120000, 126000]
+            grade_aux = grade
+            if grade == 32:
+                grade_aux == grade - 1
             if result == 0:
-                exp_threshold = easy_exp_thresholds[grade - 1]
+                exp_threshold = easy_exp_thresholds[grade_aux]
             elif result == 1:
-                exp_threshold = normal_exp_thresholds[grade - 1]
+                exp_threshold = normal_exp_thresholds[grade_aux]
             elif result == 2:
-                exp_threshold = hard_exp_thresholds[grade - 1]
+                exp_threshold = hard_exp_thresholds[grade_aux]
             else:
-                exp_threshold = accurate_exp_thresholds[grade - 1]
+                exp_threshold = accurate_exp_thresholds[grade_aux]
             print('experience: ' + str(exp),'threshold: ' + str(exp_threshold),'grade: ' + str(grade))
             if grade <= 8:
                 exp_gain = 1
