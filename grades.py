@@ -4,9 +4,14 @@ import sqlite3
 import math
 import time
 import webserver
+from git import Repo
 database = sqlite3.connect("Grades3.sqlite")
 cursor = database.cursor()
 client: client = nextcord.Client(intents=nextcord.Intents.all(), activity=nextcord.Game(name='tetris'))
+repo = Repo(CreepercraftYT/GradeBot)
+index = repo.index
+index.add([Grades3.sqlite])
+author = Actor("CreepercraftYT", "aaronx717@gmail.com")
 
 cursor.execute("""CREATE TABLE IF NOT EXISTS main(user_id INTEGER, guild_id INTEGER, exp INTEGER, grade INTEGER, last_grade INTEGER, level INTEGER, difficulty INTEGER, channel_id INTEGER)""")
 #cursor.execute("""INSERT INTO main(difficulty) VALUES(1)""")
@@ -16,6 +21,7 @@ cursor.execute("""CREATE TABLE IF NOT EXISTS main(user_id INTEGER, guild_id INTE
 
 class Grading(commands.Cog):
     bot = commands.Bot()
+    index.commit("database commit", author=author)
     #application_checks = nextcord.applicaton_checks
     def __init__(self, bot):
         self.bot = bot
@@ -90,6 +96,7 @@ class Grading(commands.Cog):
             grade_aux = grade
             if grade == 32:
                 grade_aux == grade - 1
+            print(grade_aux)
             if result == 0:
                 exp_threshold = easy_exp_thresholds[grade_aux]
             elif result == 1:
